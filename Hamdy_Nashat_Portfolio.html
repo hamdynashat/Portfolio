@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamdy Nashat - Flutter Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --cyan: #06b6d4;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --card-light: #ffffff;
+            --card-dark: #1e293b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+        }
+
+        .dark {
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --nav-bg: rgba(15, 23, 42, 0.95);
+        }
+
+        .light {
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --nav-bg: rgba(248, 250, 252, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        button, .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover, .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            height: 100%;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--cyan), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--cyan);
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+        }
+
+        .theme-toggle {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--cyan);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(6, 182, 212, 0.2);
+            transform: scale(1.1);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 4rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            animation: fadeIn 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeIn 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4rem;
+            height: 0.25rem;
+            background: var(--primary);
+            border-radius: 1rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 100%;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            position: relative;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .service-icon {
+            width: 4rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            border-radius: 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            padding: 2rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-item h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .skill-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .project-tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border-radius: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .experience-icon {
+            width: 4rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .education-item {
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .education-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .education-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            flex-shrink: 0;
+            font-size: 1.5rem;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .certification-card {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .certification-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+            font-size: 1.5rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .contact-form {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid,
+            .skills-grid,
+            .projects-grid,
+            .experience-grid,
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-img {
+                order: -1;
+            }
+        }
+
+        /* Resume download button */
+        .resume-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .resume-download:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* حل مشكلة الصورة */
+        .profile-img img {
+            object-fit: contain !important;
+            height: auto !important;
+        }
+        
+        .profile-img::after {
+            display: none !important;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark">
+    <nav class="nav">
+        <div class="nav-container container">
+            <div class="nav-logo">Hamdy Nashat</div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#what-i-do" class="nav-link">What I Do</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle">☀️</button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content container">
+            <h1 class="hero-title">Hamdy Nashat</h1>
+            <p class="hero-subtitle">Flutter Developer</p>
+            <p class="hero-description">
+                Computer Science student passionate about creating innovative mobile applications 
+                and digital experiences that inspire and add value to people's lives.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-content slide-in-left">
+                    <p>From a young age, I've always been fascinated by technology and creativity. Whether it was exploring how things work or imagining new ideas, I found joy in blending logic with imagination. That early passion became the foundation of my journey.</p>
+                    <p>When I joined the Faculty of Computers & Informatics at Tanta University, I finally had the chance to turn this curiosity into a real career path. As a student, I was eager to push beyond theory and start creating. That's when I discovered Flutter, and it completely transformed the way I looked at software development.</p>
+                    <p>What started as experimentation during my second year quickly grew into a deep interest in cross-platform mobile apps—a way to bring ideas to life and share them with the world. Alongside Flutter and Dart, I built skills in UI/UX design, databases, Git/GitHub, testing, and deployment, constantly seeking new challenges to grow.</p>
+                    <p>Beyond coding, I express my creative side through content creation, photography, and storytelling. My vision is clear: to become a recognized programmer and digital creator who inspires, entertains, and adds value to people's lives through technology.</p>
+                    
+                    <a href="Hamdy_Nashat_CV (1).pdf" class="resume-download" download>
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                </div>
+                <div class="profile-img slide-in-right">
+                    <img src="https://i.postimg.cc/4dxPd7Rt/5846131560456242344.jpg" alt="Hamdy Nashat">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="what-i-do" class="section" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">What I Do</h2>
+            <div class="services-grid">
+                <div class="service-card card fade-in">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Cross-Platform Mobile Apps</h3>
+                    <p>Build high-quality apps for Android & iOS using Flutter & Dart.</p>
+                </div>
+                <div class="service-card card fade-in">
+                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>UI/UX Implementation</h3>
+                    <p>Translate prototypes into smooth, user-friendly mobile interfaces.</p>
+                </div>
+                <div class="service-card card fade-in">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Clean Code & Architecture</h3>
+                    <p>Apply OOP principles and best practices for scalable apps.</p>
+                </div>
+                <div class="service-card card fade-in">
+                    <div class="service-icon"><i class="fas fa-database"></i></div>
+                    <h3>Database Integration</h3>
+                    <p>Design, model, and connect apps to SQL databases for real-world functionality.</p>
+                </div>
+                <div class="service-card card fade-in">
+                    <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Problem Solving</h3>
+                    <p>Optimize performance using data structures & algorithms.</p>
+                </div>
+                <div class="service-card card fade-in">
+                    <div class="service-icon"><i class="fas fa-code-branch"></i></div>
+                    <h3>Version Control</h3>
+                    <p>Collaborate on projects with Git & GitHub.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category card slide-in-left">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Development</h3>
+                    <div class="skill-item">
+                        <h4>Flutter & Dart</h4>
+                        <p>Cross-platform apps, state management, clean architecture</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Object-Oriented Programming (OOP)</h4>
+                        <p>Modular and scalable code design</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Data Structures & Algorithms</h4>
+                        <p>Efficient coding and optimization</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Version Control</h4>
+                        <p>Git & GitHub collaboration</p>
+                    </div>
+                </div>
+                <div class="skill-category card slide-in-right">
+                    <h3><i class="fas fa-database"></i> Databases & UI/UX Design</h3>
+                    <div class="skill-item">
+                        <h4>SQL & ERD Modeling</h4>
+                        <p>Relational database design and query handling</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Prototyping & Wireframing</h4>
+                        <p>User-focused mobile interfaces</p>
+                    </div>
+                </div>
+                <div class="skill-category card slide-in-left">
+                    <h3><i class="fas fa-people-carry"></i> Soft Skills</h3>
+                    <div class="skill-item">
+                        <h4>Problem-Solving & Analytical Thinking</h4>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Creativity & Innovation</h4>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Teamwork & Collaboration</h4>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Leadership & Responsibility</h4>
+                    </div>
+                </div>
+                <div class="skill-category card slide-in-right">
+                    <h3><i class="fas fa-language"></i> Languages</h3>
+                    <div class="skill-item">
+                        <h4>Arabic</h4>
+                        <p>Native</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>English</h4>
+                        <p>C1 Certified</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>French</h4>
+                        <p>Basic Understanding</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- New Project - Tasabee7 App -->
+                <div class="project-card card fade-in">
+                    <h3>Tasabee7 App</h3>
+                    <p>Tasabee7 – Digital Dhikr & Achievement Tracker. A mobile application designed to help users practice daily dhikr (remembrance of Allah) in an organized and engaging way.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">Mobile App</span>
+                        <span class="project-tag">Productivity</span>
+                        <span class="project-tag">Spirituality</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1-H_8MG-pJ1qkN4N8D_C84cX5gi7TEG4-/view?usp=drive_link" target="_blank">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+
+                <div class="project-card card fade-in">
+                    <h3>FlexiFair</h3>
+                    <p>Research on a scheduling tool that optimizes CPU resource allocation efficiently.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Research</span>
+                        <span class="project-tag">CPU Scheduling</span>
+                        <span class="project-tag">Algorithm Design</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1YgpVWMBPvcxUEw84jKG4hH77_FFtojfH/view?usp=sharing" target="_blank">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <div class="project-card card fade-in">
+                    <h3>Counter App</h3>
+                    <p>A user-friendly app built with Flutter for tracking counts easily.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">Dart</span>
+                        <span class="project-tag">Mobile Development</span>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/hamdynashat_flutter-firstapp-mobiledevelopment-activity-7357508315112767489-ysOD/" target="_blank">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <div class="project-card card fade-in">
+                    <h3>Social Media App (Login & Home)</h3>
+                    <p>Login & Home screens for a social media application with modern UI design.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">Mobile Design</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1pG5zlPv2MkUEGEJGJHQv4PSMBQ4me1DC/view" target="_blank">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <div class="project-card card fade-in">
+                    <h3>Tutoring System UI</h3>
+                    <p>A desktop UI prototype designed to enhance tutoring experience and management.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX Design</span>
+                        <span class="project-tag">Desktop</span>
+                        <span class="project-tag">Prototyping</span>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/hamdynashat_so-happy-to-share-my-first-post-on-linkedin-activity-7276575799871172608-aj2c/" target="_blank">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <div class="project-card card fade-in">
+                    <h3>Cart Simulation App</h3>
+                    <p>E-commerce cart simulation with interactive features and smooth user experience.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">E-commerce</span>
+                        <span class="project-tag">Simulation</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1DHORAQmHBUIkb5JV5hMUkUoeu0UqkCvn/view" target="_blank">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <div class="project-card card fade-in">
+                    <h3>Backgrounds Gallery App</h3>
+                    <p>A simple app with three screens showing smooth navigation and background gallery functionality.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">Dart</span>
+                        <span class="project-tag">Mobile Development</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1X3mujMboE8j4jeE0hORXuM6QZKEB3jw2/view?usp=sharing" target="_blank">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card card fade-in">
+                    <div class="experience-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Freelancing</h3>
+                    <p>Gained valuable experience through projects on Upwork.</p>
+                </div>
+                <div class="experience-card card fade-in">
+                    <div class="experience-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>DEPI Program</h3>
+                    <p>Enhanced skills and knowledge through this enriching program.</p>
+                </div>
+                <div class="experience-card card fade-in">
+                    <div class="experience-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Seminars</h3>
+                    <p>Attended seminars focused on Communication and AI advancements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="education-item card slide-in-left">
+                <div class="education-header">
+                    <div class="education-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div>
+                        <h3>Bachelor of Computers and Information</h3>
+                        <p style="color: var(--primary); font-weight: 600;">Tanta University</p>
+                        <p>October 2023 – July 2027</p>
+                        <p>GPA: 3.5/4.0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="education-item card slide-in-right">
+                <div class="education-header">
+                    <div class="education-icon"><i class="fas fa-award"></i></div>
+                    <div>
+                        <h3>Digital Egypt Pioneers Initiative (DEPI)</h3>
+                        <p style="color: var(--primary); font-weight: 600;">Software Development – Cross Platform</p>
+                        <p>June 2025 – Dec 2025</p>
+                        <p>Mobile App Developer Track</p>
+                    </div>
+                </div>
+            </div>
+            <h3 style="text-align: center; margin: 3rem 0 2rem; color: var(--text-primary);">Certifications</h3>
+            <div class="certifications-grid">
+                <div class="certification-card card fade-in">
+                    <div class="certification-icon"><i class="fas fa-brain"></i></div>
+                    <h4>Zero to Generative AI Application Development Mastery</h4>
+                    <p>Udemy</p>
+                </div>
+                <div class="certification-card card fade-in">
+                    <div class="certification-icon"><i class="fas fa-code"></i></div>
+                    <h4>The C++ Learning Guide</h4>
+                    <p>Udemy</p>
+                </div>
+                <div class="certification-card card fade-in">
+                    <div class="certification-icon"><i class="fas fa-users"></i></div>
+                    <h4>How to Become a Thought Leader in Your Industry</h4>
+                    <p>Udemy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 3rem;" class="fade-in">
+                I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-info slide-in-left">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h3>Email</h3>
+                            <a href="mailto:hamdynashat125@gmail.com">hamdynashat125@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h3>Phone</h3>
+                            <a href="tel:+201010654317">+20 1010654317</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Giza, Egypt</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/hamdynashat" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/hamdynashat" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="mailto:hamdynashat125@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form card slide-in-right">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Your message..."></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Hamdy Nashat. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'light' || 
+            (window.matchMedia('(prefers-color-scheme: light)').matches && !localStorage.getItem('theme'))) {
+            body.classList.add('light');
+            body.classList.remove('dark');
+            themeToggle.textContent = '🌙';
+        } else {
+            body.classList.add('dark');
+            body.classList.remove('light');
+            themeToggle.textContent = '☀️';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            body.classList.toggle('light');
+            
+            // Save theme preference
+            if (body.classList.contains('light')) {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            }
+        });
+        
+        // Navigation active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            const subject = `Portfolio Contact from ${name}`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            window.open(`mailto:hamdynashat125@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // حل نهائي لمشكلة الصورة
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileImg = document.querySelector('.profile-img img');
+            if (profileImg) {
+                profileImg.style.objectFit = 'contain';
+                profileImg.style.height = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
